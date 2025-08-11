@@ -1,0 +1,72 @@
+{%extends 'accounts/base.html' %}
+{%block content%}
+<div class="container">
+  <div class="jumbotron">
+    <h1>{{user.username}}'s Profile</h1>
+    <br />
+
+    <div class="card card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Email :{{ user.email}}</h5>
+          <p>Door no : {{ user.userdata.Door_no }}</p>
+          <p>Street : {{ user.userdata.street }}</p>
+          <p>City : {{ user.userdata.city }}</p>
+          <p>State : {{ user.userdata.state }}</p>
+          <p>Zipcode : {{ user.userdata.zipcode }}</p>
+          <br>
+          <a href="update" class="btn btn-primary">Update</a>
+        </div>
+
+        <div class="col-md-6">
+          {% if user.userdata.profile_pic %}
+
+          <img src="{{user.userdata.profile_pic.url}}" alt=""
+            style="border-radius: 50%; height:200px;  width:200px; position: relative; left: 200p;" />
+          {%else%}
+          <p>No Imgage</p>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+<br><br>
+
+{%if show_card%}
+    <div class="row">
+      <div class="col-md-4">
+        <div class=" card card-body">
+          <h3>Total Defects Assigned</h3>
+          <p>{{total_defects}}</p>
+
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class=" card card-body">
+          <h3>Defects Completed</h3>
+          <p>{{completed_defects}}</p>
+
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class=" card card-body">
+          <h3>Pending</h3>
+          <p>{{pending_defects}}</p>
+
+        </div>
+
+      </div>
+    </div>
+    {% endif %}
+    
+
+
+
+
+
+  </div>
+</div>
+
+</div>
+{%endblock%}

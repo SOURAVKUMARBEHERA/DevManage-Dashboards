@@ -1,0 +1,55 @@
+
+ {% extends 'defects/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="card card-body">
+            <h1 style="text-align: center;">EDIT DEFECT</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.defect_ID|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.defectName|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.assigned_by|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.assigned_to|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.defect_status|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.priority|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <input type="submit" class="btn btn-primary" value="EDIT">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

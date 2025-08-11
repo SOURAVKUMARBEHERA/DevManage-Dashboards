@@ -1,0 +1,16 @@
+{% extends 'defects/base.html' %}
+<!-- {% load crispy_forms_tags %} -->
+
+{% block content %}
+<div class=" container">
+    <div class="jumbotron">
+        <h1>Add Defects</h1>
+        <form  method="post">
+             {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-danger" value="ADD">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

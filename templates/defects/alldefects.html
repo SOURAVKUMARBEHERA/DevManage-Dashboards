@@ -1,0 +1,81 @@
+{%extends 'defects/base.html' %} {%block content%}
+<h1 class="text-center my-4">All Defects</h1>
+<h3>Total Defects : {{defects_count}}</h3>
+<div class="container">
+    <table class="table table-bordered table-info table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Defect ID</th>
+                <th>Defect Name</th>
+                <th>Assigned By</th>
+                <th>Assigned To</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Priority</th>
+
+                {% if can_edit %}
+                <th>Edit</th>
+                {% endif %}
+
+                {% if can_delete %}
+                <th>Delete</th>
+                {% endif %}
+           
+                <th>Assigned Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in list_defects %}
+            <tr>
+                <td>{{ i.defect_ID }}</td>
+                <td>{{ i.defectName }}</td>
+                <td>{{ i.assigned_by }}</td>
+                <td>{{ i.assigned_to }}</td>
+                <td><a href="{{ i.id }}">more info</a></td>
+                <td>{{ i.defect_status }}</td>
+                <td>
+                    {% if i.priority == 'High' %}
+                    <i class="bi bi-bell-fill"></i>
+                    {% elif i.priority == 'Medium' %}
+                    <i class="bi bi-capslock"></i>
+                    {%else%}
+                    <i class="bi bi-box-arrow-in-down-right"></i>
+
+                    {% endif %} 
+                </td>
+                {% if can_edit %}
+                <td><a href="edit/{{i.id}}">✏️</a></td>
+                {% endif %}
+                {% if can_delete %}
+                <td><a href="delete/{{i.id}}">🗑️</a></td>
+                {% endif %}
+               
+                <td>{{ i.assigned_date }}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    {% if show_button %}
+    <a href="{% url 'add'%}" type="submit" class="btn btn-primary">ADD</a>
+    {% endif %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item ">
+                <a class="page-link" href="?pg=1"><<</a>
+            </li>
+            {% if list_defects.has_previous %}
+            <li class="page-item"><a class="page-link" href="?pg={{list_defects.previous_page_number}}">{{list_defects.previous_page_number}}</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="?pg={{list_defects.number}}">{{list_defects.number}}</a></li>
+            {%if list_defects.has_next %}
+            <li class="page-item"><a class="page-link" href="?pg={{list_defects.next_page_number}}">{{list_defects.next_page_number}}</a></li>
+            {%endif%}
+            <li class="page-item">
+
+                <a class="page-link" href="?pg={{list_defects.paginator.num_pages}}">>></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{%endblock%}

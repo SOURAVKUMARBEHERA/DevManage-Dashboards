@@ -1,0 +1,24 @@
+
+{%extends 'accounts/base.html'%}
+{%block content%}
+    <div class="container">
+        <div class="jumbotron">
+            <div class=" card card-body">
+                <h1 style="text-align: center;">Loging Here</h1>
+                <form action="{% url 'login'%}" method="post">
+                    {%csrf_token%}
+                    <label for="username">username</label>
+                    <input type="text" name="username" placeholder="enter the username">
+                    <br><br>
+                    <label for="password">password</label>
+                    <input type="password" name="password" placeholder="enter the password">
+                    <br><br>
+                    <h5 style="text-align: center;"><a href="{% url 'forget_password' %}">Forgot password</a></h5>
+                    <br>
+                     <input type="submit",value='LOGIN'class="btn btn-success">
+                </form>
+
+            </div>
+        </div>
+    </div>
+{%endblock%}
