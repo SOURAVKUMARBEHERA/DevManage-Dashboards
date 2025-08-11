@@ -13,6 +13,7 @@ urlpatterns = [
     path('update',views.update,name='update'),
     path('forget_password',views.forget_password,name='forget_password')
     
+    
 
 
 ]

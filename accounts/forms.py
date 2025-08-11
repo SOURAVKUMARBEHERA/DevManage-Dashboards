@@ -40,6 +40,13 @@ class ForgotPasswordForm(forms.Form):
                  User.objects.get(username=username)
             except :
                 raise forms.ValidationError("Username does not exist.")
+            
+        if password !=confirm_password:
+            raise forms.ValidationError('passwoed dont match')
+           
+                
+           
+
 
 
    

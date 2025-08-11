@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,logout,login
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required 
 from defects.models import defectsData,Developers
+from django.contrib.auth.models import User
 
 
 
@@ -118,16 +119,22 @@ def update(request):
 
 
 def forget_password(request):
+     pasw=False
      if request.method=='POST':
           form=ForgotPasswordForm(request.POST)
           if form.is_valid():
+               username=form.cleaned_data['username']
+               password=form.cleaned_data['password']
+               user=User.objects.get(username=username)
+               user.set_password(password)
+               user.save()
+               pasw=True
 
-               print(form.cleaned_data['username'])
-               print(form.cleaned_data['password'])
-               print(form.cleaned_data['confirm_password'])
+               
      else:
                form=ForgotPasswordForm()
-     return render(request,'accounts/forgetpassword.html',{'form':form})
+     return render(request,'accounts/forgetpassword.html',{'form':form,'pasw':pasw})
+
 
 
 
